@@ -1,9 +1,9 @@
-const express = require( 'express' )
+const express = require( 'express' );
+const passport = require( 'passport' );
+const GoogleOath = require( 'passport-google-oauth20' );
 
 const app = express();
+passport.use( GoogleOath(  ) );
 
-app.get('/', ( req, res ) => {
-		res.send( { hi: 'there' } );
-	});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
