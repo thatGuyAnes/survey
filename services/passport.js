@@ -2,6 +2,7 @@ const mongoose = require( 'mongoose' );
 const passport = require( 'passport' );
 const GoogleStrategy = require( 'passport-google-oauth20' ).Strategy;
 const keys = require( '../config/keys' );
+//
 const User = mongoose.model( 'users' );
 
 // Serialisation
@@ -25,6 +26,12 @@ passport.use(
       callbackURL: '/auth/google/callback',
       proxy: true
     },
+    // {
+    //   clientID: process.env.GOOGLE_ID,
+    //   clientSecret: process.env.GOOGLE_SECRET,
+    //   callbackURL: '/auth/google/callback',
+    //   proxy: true
+    // },
     ( accessToken, refreshToken, profile, done ) => { // This CB is fired the moment a user is sent back from google after granting access to our application.
       User.findOne( { googleId: profile.id } )
         .then( ( existingUser ) => {
